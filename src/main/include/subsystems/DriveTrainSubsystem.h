@@ -10,6 +10,13 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
  public:
   DrivetrainSubsystem();
 
+      void ArcadeDrive (double forward, double rotation, bool squareInputs);
+      void ResetEncoders();
+      double GetLeftEncoderDistance();
+      double GetRightEncoderDistance();
+      double GetLeftEncoderVelocity();
+      double GetRightEncoderVelocity();
+
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
@@ -17,6 +24,12 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
   void Periodic() override;
 
  private:
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
+      WPI_TalonFX m_leftFront;
+      WPI_TalonFX m_leftMiddle;
+      WPI_TalonFX m_leftBack;
+      WPI_TalonFX m_rightFront;
+      WPI_TalonFX m_rightMiddle;
+      WPI_TalonFX m_rightBack;
+
+      frc::DifferentialDrive m_drive{m_leftFront, m_rightFront};
 };

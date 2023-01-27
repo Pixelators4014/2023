@@ -4,7 +4,7 @@
 
 #include "subsystems/DrivetrainSubsystem.h"
 
-DrivetrainSubsystem::DrivetrainSubsystem() = default;
+DrivetrainSubsystem::DrivetrainSubsystem();
 
 // This method will be called once per scheduler run
 void DrivetrainSubsystem::Periodic() {}
