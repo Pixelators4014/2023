@@ -6,9 +6,10 @@
 
 #include <frc2/command/SubsystemBase.h>
 
-class driveTrain : public frc2::SubsystemBase {
+class DrivetrainSubsystem : public frc2::SubsystemBase {
  public:
-  driveTrain();
+  DrivetrainSubsystem();
+
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
