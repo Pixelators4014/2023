@@ -46,5 +46,10 @@ constexpr auto kJ2ID = 1;
 constexpr auto kJ3ID = 2;
 constexpr auto kJ4ID = 3;
 
+constexpr auto kJ1Length = 0.1_m;
+constexpr auto kJ2Length = 0.1_m;
+constexpr auto kJ3Length = 0.1_m;
+constexpr auto kJ4Length = 0.1_m;
+
 constexpr auto kNeutralMode = NeutralMode::Coast;
 }
