@@ -4,9 +4,6 @@
 
 #pragma once
 
-// #include <frc/ADXRS450_Gyro.h>
-// #include <frc/motorcontrol/PWMSparkMax.h>
-// #include <frc/simulation/ADXRS450_GyroSim.h>
 #include <Constants.h>
 #include <frc2/command/SubsystemBase.h>
 #include <frc/ADIS16470_IMU.h>
@@ -19,6 +16,8 @@
 #include <frc/simulation/DifferentialDrivetrainSim.h>
 #include <frc/simulation/EncoderSim.h>
 #include <frc/smartdashboard/Field2d.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/RobotController.h>
 #include <frc2/command/SubsystemBase.h>
 #include <units/voltage.h>
 
@@ -55,7 +54,7 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
     *
     * @return The turn rate of the robot, in degrees per second
     */
-    double GetTurnRate();
+    units::angular_velocity::degrees_per_second_t GetTurnRate();
 
     /**
     * Returns the currently-estimated pose of the robot.
@@ -96,8 +95,8 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
    WPI_TalonFX m_rightFollower1{DriveConstants::kRightFollower1ID};
    WPI_TalonFX m_rightFollower2{DriveConstants::kRightFollower2ID};
 
-   TalonFXSimCollection& m_leftMasterSim{m_leftMaster};
-	TalonFXSimCollection& m_rightMasterSim{m_rightMaster};
+   TalonFXSimCollection m_leftMasterSim{m_leftMaster};
+	TalonFXSimCollection m_rightMasterSim{m_rightMaster};
 
    frc::DifferentialDrive m_drive{m_leftMaster, m_rightMaster};
 
@@ -105,12 +104,14 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
 
    frc::sim::ADIS16470_IMUSim m_IMUSim{m_IMU};
 
-   frc::DifferentialDriveOdometry m_odometry; // could init, IDK
+   frc::DifferentialDriveOdometry m_odometry{
+      m_IMU.GetAngle(), m_leftMaster.GetSelectedSensorPosition() * DriveConstants::kWheelEncoderMetersPerUnit, m_rightMaster.GetSelectedSensorPosition() * DriveConstants::kWheelEncoderMetersPerUnit
+   };
 
    frc::sim::DifferentialDrivetrainSim m_drivetrainSimulator{ // come back to drivetrain plant later
       frc::DCMotor::Falcon500(3),
       DriveConstants::kDrivetrainGearing,
-      DriveConstants::MOI,
+      DriveConstants::kMOI,
       DriveConstants::kMass,
       DriveConstants::kWheelDiameter / 2,
       DriveConstants::kTrackwidth,

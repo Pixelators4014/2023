@@ -40,9 +40,9 @@ DrivetrainSubsystem::DrivetrainSubsystem() {
 
 // This method will be called once per scheduler run
 void DrivetrainSubsystem::Periodic() {
-    m_odometry.Update(m_IMU.GetRotation2d(),
-        units::meter_t{m_leftMaster.GetSelectedSensorPosition() / kEncoderUnitsPerInch},
-        units::meter_t{m_rightMaster.GetSelectedSensorPosition() / kEncoderUnitsPerInch});
+    m_odometry.Update(m_IMU.GetAngle(),
+        units::meter_t{m_leftMaster.GetSelectedSensorPosition() * kWheelEncoderMetersPerUnit},
+        units::meter_t{m_rightMaster.GetSelectedSensorPosition() * kWheelEncoderMetersPerUnit});
     m_fieldSim.SetRobotPose(m_odometry.GetPose());
 }
 
@@ -53,19 +53,15 @@ void DrivetrainSubsystem::SimulationPeriodic() {
             frc::RobotController::GetInputVoltage());
     m_drivetrainSimulator.Update(20_ms);
 
-    m_leftEncoderSim.SetDistance(m_drivetrainSimulator.GetLeftPosition().value());
-    m_leftEncoderSim.SetRate(m_drivetrainSimulator.GetLeftVelocity().value());
-    m_rightEncoderSim.SetDistance(m_drivetrainSimulator.GetRightPosition().value());
-    m_rightEncoderSim.SetRate(m_drivetrainSimulator.GetRightVelocity().value());
-    m_IMUSim.SetAngle(-m_drivetrainSimulator.GetHeading().Degrees());
+    m_IMUSim.SetGyroAngleY(-m_drivetrainSimulator.GetHeading().Degrees()); // make sure this is the right axis
 }
 
 units::ampere_t DrivetrainSubsystem::GetCurrentDraw() const {
   return m_drivetrainSimulator.GetCurrentDraw();
 }
 
-void DrivetrainSubsystem::ArcadeDrive(double fwd, double rot) {
-  m_drive.ArcadeDrive(fwd, rot);
+void DrivetrainSubsystem::ArcadeDrive(double fwd, double rot, bool squaredInputs) {
+  m_drive.ArcadeDrive(fwd, rot, squaredInputs);
 }
 
 void DrivetrainSubsystem::ResetEncoders() {
@@ -73,16 +69,12 @@ void DrivetrainSubsystem::ResetEncoders() {
   m_rightMaster.SetSelectedSensorPosition(0);
 }
 
-void DrivetrainSubsystem::SetMaxOutput(double maxOutput) {
-  m_drive.SetMaxOutput(maxOutput);
-}
-
 units::degree_t DrivetrainSubsystem::GetHeading() const {
-  return m_IMU.GetRotation2d().Degrees();
+  return m_IMU.GetAngle();
 }
 
-double DrivetrainSubsystem::GetTurnRate() {
-  return -m_IMU.GetRate();
+units::angular_velocity::degrees_per_second_t DrivetrainSubsystem::GetTurnRate() {
+  return m_IMU.GetRate();
 }
 
 frc::Pose2d DrivetrainSubsystem::GetPose() {
@@ -97,7 +89,7 @@ frc::DifferentialDriveWheelSpeeds DrivetrainSubsystem::GetWheelSpeeds() {
 void DrivetrainSubsystem::ResetOdometry(frc::Pose2d pose) {
   ResetEncoders();
   m_drivetrainSimulator.SetPose(pose);
-  m_odometry.ResetPosition(m_gyro.GetRotation2d(),
-                           units::meter_t{m_leftMaster.GetSelectedSensorPosition() / kEncoderUnitsPerInch},
-                           units::meter_t{m_rightMaster.GetSelectedSensorPosition() / kEncoderUnitsPerInch}, pose);
+  m_odometry.ResetPosition(m_IMU.GetAngle(),
+                           m_leftMaster.GetSelectedSensorPosition() * kWheelEncoderMetersPerUnit,
+                           m_rightMaster.GetSelectedSensorPosition() * kWheelEncoderMetersPerUnit, pose);
 }

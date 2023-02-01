@@ -13,6 +13,8 @@
 #include <units/velocity.h>
 #include <units/voltage.h>
 
+#include <ctre/Phoenix.h>
+
 #pragma once
 
 namespace DriveConstants {
@@ -31,7 +33,9 @@ constexpr auto kRightFollower2ID = 0;
 constexpr auto kLeftMotorInverted = true;
 constexpr auto kRightMotorInverted = false;
 
+
 // constexpr auto kCountsPerRevolution = 2048;
-constexpr auto kEncoderUnitsPerInch = 1;
-constexpr auto kNeutralMode = 1;
+// constexpr auto kEncoderUnitsPerInch = 1;
+constexpr auto kWheelEncoderMetersPerUnit = 1_m;
+constexpr auto kNeutralMode = NeutralMode::Coast;
 }
