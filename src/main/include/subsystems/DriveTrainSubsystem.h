@@ -32,10 +32,10 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
     /**
     * Drives the robot using arcade controls.
     *
-    * @param fwd the commanded forward movement
-    * @param rot the commanded rotation
+    * @param forward the commanded forward movement
+    * @param rotation the commanded rotation
     */
-    void ArcadeDrive (double forward, double rotation, bool squareInputs);
+    void ArcadeDrive(double forward, double rotation, bool squareInputs);
 
     /**
     * Resets the drive encoders to currently read a position of 0.

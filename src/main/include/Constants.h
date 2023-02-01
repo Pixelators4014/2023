@@ -39,3 +39,12 @@ constexpr auto kRightMotorInverted = false;
 constexpr auto kWheelEncoderMetersPerUnit = 1_m;
 constexpr auto kNeutralMode = NeutralMode::Coast;
 }
+
+namespace ArmConstants {
+constexpr auto kJ1ID = 0;
+constexpr auto kJ2ID = 1;
+constexpr auto kJ3ID = 2;
+constexpr auto kJ4ID = 3;
+
+constexpr auto kNeutralMode = NeutralMode::Coast;
+}
