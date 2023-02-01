@@ -18,6 +18,22 @@ ArmSubsystem::ArmSubsystem() {
     m_J4.SetNeutralMode(kNeutralMode);
 };
 
+units::degree_t ArmSubsystem::GetAngleJ1() {
+    return units::degree_t{m_encoderJ1.GetRaw()};
+}
+
+units::degree_t ArmSubsystem::GetAngleJ2() {
+    return units::degree_t{m_encoderJ1.GetRaw()};
+}
+units::degree_t ArmSubsystem::GetAngleJ3() {
+    return units::degree_t{m_encoderJ1.GetRaw()};
+}
+units::degree_t ArmSubsystem::GetAngleJ4() {
+    return units::degree_t{m_encoderJ1.GetRaw()};
+}
+
+
 
 // This method will be called once per scheduler run
 void ArmSubsystem::Periodic() {}
+
