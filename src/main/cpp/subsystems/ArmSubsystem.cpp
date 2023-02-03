@@ -5,8 +5,10 @@
 #include "subsystems/ArmSubsystem.h"
 
 using namespace ArmConstants;
+using namespace Eigen;
 
-ArmSubsystem::ArmSubsystem() {
+ArmSubsystem::ArmSubsystem()
+{
     m_J1.ConfigFactoryDefault();
     m_J2.ConfigFactoryDefault();
     m_J3.ConfigFactoryDefault();
@@ -18,50 +20,67 @@ ArmSubsystem::ArmSubsystem() {
     m_J4.SetNeutralMode(kNeutralMode);
 };
 
-units::degree_t ArmSubsystem::GetAngleJ1() {
+units::degree_t ArmSubsystem::GetAngleJ1()
+{
     return units::degree_t{m_encoderJ1.GetRaw()};
 }
 
-units::degree_t ArmSubsystem::GetAngleJ2() {
+units::degree_t ArmSubsystem::GetAngleJ2()
+{
     return units::degree_t{m_encoderJ1.GetRaw()};
 }
-units::degree_t ArmSubsystem::GetAngleJ3() {
+units::degree_t ArmSubsystem::GetAngleJ3()
+{
     return units::degree_t{m_encoderJ1.GetRaw()};
 }
-units::degree_t ArmSubsystem::GetAngleJ4() {
+units::degree_t ArmSubsystem::GetAngleJ4()
+{
     return units::degree_t{m_encoderJ1.GetRaw()};
 }
 
-frc::Pose3d ArmSubsystem::GetPosition() {
-    frc::Pose3d pose{frc::Translation3d{0_m, 0_m, 0_m}, frc::Rotation3d{0_deg,0_deg,0_deg}};
-
-    // first joint
-
-    pose.Rotation().Z() += GetAngleJ1();
-    pose.Translation().Z() += kJ1Length;
-
-    // second joint
-
-    pose.Rotation().X() += GetAngleJ2() * sin(pose.Rotation().Z());
-    pose.Rotation().Y() += GetAngleJ2() * cos(pose.Rotation().Z());
-    pose.Translation().X() += kJ2Length * sin(pose.Rotation().X());
-    pose.Translation().Y() += kJ2Length * sin(pose.Rotation().Y());
-    pose.Translation().Z() += kJ2Length * sin(pose.Rotation().Z());
-
-    // third joint
-
-    pose.Rotation().Y() += GetAngleJ3();
-    pose.Translation().X() += kJ3Length * sin(pose.Rotation().X());
-    pose.Translation().Y() += kJ3Length * sin(pose.Rotation().Y());
-    pose.Translation().Z() += kJ3Length * sin(pose.Rotation().Z());
-
-    // fourth joint
+frc::Pose3d ArmSubsystem::GetPosition(double theta_1, double theta_2, double theta_3, double theta_4)
+{
     
-    pose.Rotation().Y() += GetAngleJ4();
-    pose.Translation().X() += kJ4Length * sin(pose.Rotation().X());
-    pose.Translation().Y() += kJ4Length * sin(pose.Rotation().Y());
-    pose.Translation().Z() += kJ4Length * sin(pose.Rotation().Z());
+    // Matrix<double, 4, 4> M {
+    //     {0, 0, -1, 0},
+    //     {0, 1, 0, 0},
+    //     {-1, 0, 0, 2},
+    //     {0, 0, 0, 1},
+    // };
+    // Matrix<double, 6, 1> S1{
+    //     0,
+    //     0,
+    //     1,
+    //     0,
+    //     0,
+    //     0,
+    // };
+    // Matrix<double, 6, 1> S2{
+    //     0,
+    //     -1,
+    //     0,
+    //     -3, // this is the length of the first arm segment
+    //     0,
+    //     0,
+    // };
+    // Matrix<double, 6, 1> S3{
+    //     0,
+    //     -1,
+    //     0,
+    //     -5, // this is the length of the first arm segment + the length of the second arm segment
+    //     0,
+    //     0,
+    // };
+    // Matrix<double, 6, 1> S4{
+    //     0,
+    //     -1,
+    //     0,
+    //     -7, // this is the length of the first arm segment + the length of the second arm segment + the length of the third arm segment
+    //     0,
+    //     0,
+    // };
+
+    // (theta_1*S1).exp()*(theta_2*S2).exp();//*(theta_3*S3).exp()*(theta_4*S4).exp()*M;
 }
 // This method will be called once per scheduler run
 void ArmSubsystem::Periodic() {}
-

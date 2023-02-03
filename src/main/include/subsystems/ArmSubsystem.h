@@ -12,6 +12,7 @@
 #include <ctre/Phoenix.h>
 
 #include <Eigen/Core>
+#include <unsupported/Eigen/MatrixFunctions>
 
 #include <Constants.h>
 
@@ -34,7 +35,7 @@ class ArmSubsystem : public frc2::SubsystemBase {
   units::degrees_per_second GetVelocityJ3();
   units::degrees_per_second GetVelocityJ4();
 
-  frc::Pose3d GetPosition();
+  frc::Pose3d GetPosition(double theta_1, double theta_2, double theta_3, double theta_4);
 
   void GoToAngleJ1(units::degree_t angle);
   void GoToAngleJ2(units::degree_t angle);
