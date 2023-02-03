@@ -61,7 +61,7 @@ frc::Pose3d ArmSubsystem::GetPosition() {
     pose.Translation().X() += kJ4Length * sin(pose.Rotation().X());
     pose.Translation().Y() += kJ4Length * sin(pose.Rotation().Y());
     pose.Translation().Z() += kJ4Length * sin(pose.Rotation().Z());
-
+}
 // This method will be called once per scheduler run
 void ArmSubsystem::Periodic() {}
 
