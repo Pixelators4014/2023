@@ -40,7 +40,12 @@ units::degree_t ArmSubsystem::GetAngleJ4()
 
 frc::Pose3d ArmSubsystem::GetPosition(double theta_1, double theta_2, double theta_3, double theta_4)
 {
-    
+    // T_1 = [[c_1, -s_1, 0, 0], [s_1, c_1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    // T_2 = [[1, 0, 0, 0], [0, c_2, -s_2, 0], [0, s_2, c_2, L2], [0, 0, 0, 1]]
+    // T_3 = [[1, 0, 0, 0], [0, c_3, -s_3, 0], [0, s_3, c_3, L3], [0, 0, 0, 1]]
+    // T_4 = [[1, 0, 0, 0], [0, c_4, -s_4, 0], [0, s_4, c_4, L4], [0, 0, 0, 1]]
+    // T_5 = [[1, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, L5], [0, 0, 0, 1]]
+    // T_1*T_2*T_3*T_4*T_5 = 
     // Matrix<double, 4, 4> M {
     //     {0, 0, -1, 0},
     //     {0, 1, 0, 0},
@@ -79,6 +84,8 @@ frc::Pose3d ArmSubsystem::GetPosition(double theta_1, double theta_2, double the
     //     0,
     //     0,
     // };
+
+
 
     // (theta_1*S1).exp()*(theta_2*S2).exp();//*(theta_3*S3).exp()*(theta_4*S4).exp()*M;
 }
