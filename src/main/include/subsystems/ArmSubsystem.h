@@ -7,6 +7,8 @@
 #include <frc2/command/SubsystemBase.h>
 #include <frc/system/plant/LinearSystemId.h>
 #include <frc/geometry/Pose3d.h>
+#include <frc/geometry/Translation3d.h>
+#include <frc/geometry/Rotation3d.h>
 #include <frc/Encoder.h>
 
 #include <ctre/Phoenix.h>
