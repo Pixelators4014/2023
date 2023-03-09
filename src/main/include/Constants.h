@@ -24,12 +24,12 @@ constexpr auto kMOI = 7.5_kg_sq_m;
 constexpr auto kMass = 60_kg;
 constexpr auto kWheelDiameter = 6_in;
 constexpr auto kTrackWidth = 0.7112_m;
-constexpr auto kLeftMasterID = 0;
-constexpr auto kLeftFollower1ID = 0;
-constexpr auto kLeftFollower2ID = 0;
-constexpr auto kRightMasterID = 0;
-constexpr auto kRightFollower1ID = 0;
-constexpr auto kRightFollower2ID = 0;
+constexpr auto kLeftMasterID = 11;
+constexpr auto kLeftFollower1ID = 12;
+constexpr auto kLeftFollower2ID = 13;
+constexpr auto kRightMasterID = 14;
+constexpr auto kRightFollower1ID = 15;
+constexpr auto kRightFollower2ID = 16;
 constexpr auto kLeftMotorInverted = true;
 constexpr auto kRightMotorInverted = false;
 
@@ -52,4 +52,9 @@ constexpr auto kL3 = 0.1_m;
 constexpr auto kL4 = 0.1_m;
 
 constexpr auto kNeutralMode = NeutralMode::Coast;
+}
+
+namespace OIConstants {
+constexpr auto driverControllerPort = 1;
+constexpr auto driverSquareInputsButton = 1;
 }

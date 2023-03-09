@@ -4,7 +4,14 @@
 
 #pragma once
 
+#include <frc/Joystick.h>
+#include <frc2/command/Command.h>
 #include <frc2/command/CommandPtr.h>
+#include <frc2/command/InstantCommand.h>
+#include <frc2/command/RunCommand.h>
+
+#include <Constants.h>
+#include "subsystems/DrivetrainSubsystem.h"
 
 class RobotContainer {
  public:
@@ -13,5 +20,8 @@ class RobotContainer {
   frc2::CommandPtr GetAutonomousCommand();
 
  private:
+
+  frc::Joystick m_driverController{OIConstants::driverControllerPort};
+  DrivetrainSubsystem m_drive;
   void ConfigureBindings();
 };

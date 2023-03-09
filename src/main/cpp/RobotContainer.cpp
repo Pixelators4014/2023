@@ -8,6 +8,11 @@
 
 RobotContainer::RobotContainer() {
   ConfigureBindings();
+
+  m_drive.SetDefaultCommand(frc2::RunCommand([this] {
+    m_drive.ArcadeDrive(-m_driverController.GetY(),-m_driverController.GetX(), m_driverController.GetRawButton(OIConstants::driverSquareInputsButton));
+  },
+  {&m_drive}));
 }
 
 void RobotContainer::ConfigureBindings() {}
