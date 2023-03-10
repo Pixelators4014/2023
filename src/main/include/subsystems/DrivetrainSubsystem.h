@@ -35,7 +35,7 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
     * @param forward the commanded forward movement
     * @param rotation the commanded rotation
     */
-    void ArcadeDrive(double forward, double rotation, bool squareInputs);
+    void ArcadeDrive(double forward, double rotation);
 
     /**
     * Resets the drive encoders to currently read a position of 0.
