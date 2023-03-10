@@ -42,6 +42,7 @@
 #include <units/velocity.h>
 #include <units/voltage.h>
 #include <units/volume.h>
+#include <units/constants.h>
 
 #include <ctre/Phoenix.h>
 
@@ -63,10 +64,8 @@ constexpr auto kRightFollower2ID = 16;
 constexpr auto kLeftMotorInverted = true;
 constexpr auto kRightMotorInverted = false;
 
-
-// constexpr auto kCountsPerRevolution = 2048;
-// constexpr auto kEncoderUnitsPerInch = 1;
-constexpr auto kWheelEncoderMetersPerUnit = 1_m;
+constexpr auto kCountsPerRevolution = 2048;
+constexpr auto kWheelEncoderMetersPerUnit = units::meter_t{kWheelDiameter * units::constants::pi / (kCountsPerRevolution * kDrivetrainGearing)};
 constexpr auto kNeutralMode = NeutralMode::Coast;
 }
 

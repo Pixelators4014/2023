@@ -49,7 +49,7 @@ void DrivetrainSubsystem::Periodic() {
 void DrivetrainSubsystem::SimulationPeriodic() {
   m_leftMasterSim.SetBusVoltage(frc::RobotController::GetInputVoltage());
   m_rightMasterSim.SetBusVoltage(frc::RobotController::GetInputVoltage());
-  
+
   m_drivetrainSimulator.SetInputs(
     units::volt_t{m_leftMasterSim.GetMotorOutputLeadVoltage()},
     units::volt_t{m_rightMasterSim.GetMotorOutputLeadVoltage()}
