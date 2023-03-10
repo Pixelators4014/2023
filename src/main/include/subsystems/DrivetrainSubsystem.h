@@ -20,8 +20,6 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
  public:
   DrivetrainSubsystem();
 
-    units::ampere_t GetCurrentDraw() const;
-
     /**
     * Drives the robot using arcade controls.
     *
@@ -31,7 +29,7 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
     void ArcadeDrive(double forward, double rotation);
 
     /**
-    * Resets the drive encoders to currently read a position of 0.
+    * Resets the drive encoders to a position of 0.
     */
     void ResetEncoders();
 

@@ -11,9 +11,7 @@
 #include <frc/geometry/Rotation3d.h>
 #include <frc/Encoder.h>
 
-#include <ctre/Phoenix.h>
-
-#include <Constants.h>
+#include "Constants.h"
 
 class ArmSubsystem : public frc2::SubsystemBase {
  public:

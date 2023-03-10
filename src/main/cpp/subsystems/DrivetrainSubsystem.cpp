@@ -64,8 +64,8 @@ void DrivetrainSubsystem::SimulationPeriodic() {
   // m_IMUSim.SetGyroAngleY(m_drivetrainSimulator.GetHeading().Degrees()); // make sure this is the right axis
 }
 
-void DrivetrainSubsystem::ArcadeDrive(double fwd, double rot) {
-  m_drive.ArcadeDrive(fwd, rot);
+void DrivetrainSubsystem::ArcadeDrive(double forward, double rotation) {
+  m_drive.ArcadeDrive(forward, rotation);
 }
 
 void DrivetrainSubsystem::ResetEncoders() {
