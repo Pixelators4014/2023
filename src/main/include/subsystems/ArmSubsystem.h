@@ -24,24 +24,7 @@ class ArmSubsystem : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
-  units::degree_t GetAngleJ1();
-  units::degree_t GetAngleJ2();
-  units::degree_t GetAngleJ3();
-  units::degree_t GetAngleJ4();
-
-  units::degrees_per_second GetVelocityJ1();
-  units::degrees_per_second GetVelocityJ2();
-  units::degrees_per_second GetVelocityJ3();
-  units::degrees_per_second GetVelocityJ4();
-
   frc::Pose3d GetPosition(double theta_1, double theta_2, double theta_3, double theta_4);
-
-  void GoToAngleJ1(units::degree_t angle);
-  void GoToAngleJ2(units::degree_t angle);
-  void GoToAngleJ3(units::degree_t angle);
-  void GoToAngleJ4(units::degree_t angle);
-
-  void GoToPosition(frc::Pose3d position);
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be

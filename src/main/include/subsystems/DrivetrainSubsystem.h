@@ -4,24 +4,17 @@
 
 #pragma once
 
-#include <Constants.h>
 #include <frc2/command/SubsystemBase.h>
 #include <frc/ADIS16470_IMU.h>
 #include <frc/simulation/ADIS16470_IMUSim.h>
-#include <frc/Encoder.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/geometry/Pose2d.h>
 #include <frc/kinematics/DifferentialDriveOdometry.h>
-#include <frc/motorcontrol/MotorControllerGroup.h>
 #include <frc/simulation/DifferentialDrivetrainSim.h>
-#include <frc/simulation/EncoderSim.h>
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/smartdashboard/SmartDashboard.h>
-#include <frc/RobotController.h>
-#include <frc2/command/SubsystemBase.h>
-#include <units/voltage.h>
 
-#include <ctre/Phoenix.h>
+#include "Constants.h"
 
 class DrivetrainSubsystem : public frc2::SubsystemBase {
  public:
@@ -41,41 +34,6 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
     * Resets the drive encoders to currently read a position of 0.
     */
     void ResetEncoders();
-
-    /**
-    * Returns the heading of the robot.
-    *
-    * @return the robot's heading in degrees, from -180 to 180
-    */
-    units::degree_t GetHeading() const;
-
-    /**
-    * Returns the turn rate of the robot.
-    *
-    * @return The turn rate of the robot, in degrees per second
-    */
-    units::angular_velocity::degrees_per_second_t GetTurnRate();
-
-    /**
-    * Returns the currently-estimated pose of the robot.
-    *
-    * @return The pose.
-    */
-    frc::Pose2d GetPose();
-
-    /**
-    * Returns the current wheel speeds of the robot.
-    *
-    * @return The current wheel speeds.
-    */
-    frc::DifferentialDriveWheelSpeeds GetWheelSpeeds();
-
-    /**
-    * Resets the odometry to the specified pose.
-    *
-    * @param pose The pose to which to set the odometry.
-    */
-    void ResetOdometry(frc::Pose2d pose);
 
     /**
     * Will be called periodically whenever the CommandScheduler runs.
