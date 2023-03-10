@@ -13,6 +13,7 @@
 #include <frc/simulation/DifferentialDrivetrainSim.h>
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/RobotController.h>
 
 #include "Constants.h"
 
