@@ -10,6 +10,7 @@
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/RunCommand.h>
+#include <frc2/command/SequentialCommandGroup.h>
 #include <frc/trajectory/TrajectoryGenerator.h>
 #include <frc/controller/PIDController.h>
 #include <frc2/command/RamseteCommand.h>

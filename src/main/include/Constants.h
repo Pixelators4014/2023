@@ -71,7 +71,7 @@ constexpr auto ka = 0.2 * 1_V / 1_mps_sq;
 
 constexpr double kPDriveVel = 8.5;
 
-extern frc::DifferentialDriveKinematics kDriveKinematics;
+extern const frc::DifferentialDriveKinematics kDriveKinematics;
 
 constexpr auto kCountsPerRevolution = 2048;
 constexpr auto kWheelEncoderMetersPerUnit = units::meter_t{kWheelDiameter * units::constants::pi / (kCountsPerRevolution * kDrivetrainGearing)};

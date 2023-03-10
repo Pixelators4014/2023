@@ -24,16 +24,23 @@ frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
       frc::Pose2d{4_m, 2_m, 0_deg},
       config);
   
-  // frc2::RamseteCommand ramseteCommand(
-  //     trajectory, [this] { return m_drive.GetPose(); },
-  //     frc::RamseteController{AutoConstants::kRamseteB,
-  //                            AutoConstants::kRamseteZeta},
-  //     frc::SimpleMotorFeedforward<units::meters>(
-  //         DriveConstants::ks, DriveConstants::kv, DriveConstants::ka),
-  //     DriveConstants::kDriveKinematics,
-  //     [this] { return m_drive.GetWheelSpeeds(); },
-  //     frc2::PIDController{DriveConstants::kPDriveVel, 0, 0},
-  //     frc2::PIDController{DriveConstants::kPDriveVel, 0, 0},
-  //     [this](auto left, auto right) { m_drive.TankDriveVolts(left, right); },
-  //     {&m_drive});
+  frc2::CommandPtr ramseteCommand{frc2::RamseteCommand(
+      trajectory, [this] { return m_drive.GetPose(); },
+      frc::RamseteController{AutoConstants::kRamseteB,
+                             AutoConstants::kRamseteZeta},
+      frc::SimpleMotorFeedforward<units::meters>{
+          DriveConstants::ks, DriveConstants::kv, DriveConstants::ka},
+      DriveConstants::kDriveKinematics,
+      [this] { return m_drive.GetWheelSpeeds(); },
+      frc2::PIDController{DriveConstants::kPDriveVel, 0, 0},
+      frc2::PIDController{DriveConstants::kPDriveVel, 0, 0},
+      [this](auto left, auto right) { m_drive.TankDriveVolts(left, right); },
+      {&m_drive})};
+  
+  // return frc2::cmd::Print("No autonomous command configured");
+  return ramseteCommand;
+
+  // return new frc2::SequentialCommandGroup(
+  //     std::move(ramseteCommand),
+  //     frc2::InstantCommand([this] { m_drive.TankDriveVolts(0_V, 0_V); }, {}));
 }
