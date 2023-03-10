@@ -13,9 +13,6 @@
 
 #include <ctre/Phoenix.h>
 
-#include <Eigen/Core>
-#include <unsupported/Eigen/MatrixFunctions>
-
 #include <Constants.h>
 
 class ArmSubsystem : public frc2::SubsystemBase {

@@ -5,7 +5,6 @@
 #include "subsystems/ArmSubsystem.h"
 
 using namespace ArmConstants;
-using namespace Eigen;
 
 ArmSubsystem::ArmSubsystem()
 {

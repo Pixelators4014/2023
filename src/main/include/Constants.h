@@ -56,5 +56,4 @@ constexpr auto kNeutralMode = NeutralMode::Coast;
 
 namespace OIConstants {
 constexpr auto driverControllerPort = 1;
-constexpr auto driverSquareInputsButton = 1;
 }
