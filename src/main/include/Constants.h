@@ -90,6 +90,8 @@ constexpr auto kFD = 1;
 constexpr auto kRP = 1;
 constexpr auto kRI = 1;
 constexpr auto kRD = 1;
+
+constexpr auto kMotorStrength = 1;
 }
 
 namespace ArmConstants {

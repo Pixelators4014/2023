@@ -45,13 +45,13 @@ frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
     {&m_drive}
   )};
 
-  // frc2::CommandPtr FPIDCommand{frc2::PIDCommand(
-  //   frc::PIDController{AutoConstants::kFP,AutoConstants::kFI,AutoConstants::kFD},
-  //   [this] { return m_drive; },
-  //   [this] { return 0.0; },
-  //   [this](auto r) { m_drive.ArcadeDriveR(r); },
-  //   {&m_drive}
-  // )};
+  frc2::CommandPtr FPIDCommand{frc2::PIDCommand(
+    frc::PIDController{AutoConstants::kFP,AutoConstants::kFI,AutoConstants::kFD},
+    [this] { return m_drive.GetRotationX().value(); },
+    [this] { return 0.0; },
+    [this](auto f) { m_drive.ArcadeDriveF(f + AutoConstants::kMotorStrength*sin(m_drive.GetRotationX().value())); },
+    {&m_drive}
+  )};
 
   return ramseteCommand;
 }
