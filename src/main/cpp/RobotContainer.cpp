@@ -36,11 +36,6 @@ frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
       frc2::PIDController{DriveConstants::kPDriveVel, 0, 0},
       [this](auto left, auto right) { m_drive.TankDriveVolts(left, right); },
       {&m_drive})};
-  
-  // return frc2::cmd::Print("No autonomous command configured");
-  return ramseteCommand;
 
-  // return new frc2::SequentialCommandGroup(
-  //     std::move(ramseteCommand),
-  //     frc2::InstantCommand([this] { m_drive.TankDriveVolts(0_V, 0_V); }, {}));
+  return ramseteCommand;
 }
