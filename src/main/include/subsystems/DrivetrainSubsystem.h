@@ -45,7 +45,11 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
    */
    frc::Pose2d GetPose();
 
-   double GetRotation();
+   units::degree_t GetRotationX();
+
+   units::degree_t GetRotationY();
+
+   units::degree_t GetRotationZ();
 
    /**
    * Returns the current wheel speeds of the robot.

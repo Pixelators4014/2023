@@ -68,8 +68,19 @@ void DrivetrainSubsystem::ArcadeDrive(double forward, double rotation) {
   m_drive.ArcadeDrive(forward, rotation);
 }
 
-double DrivetrainSubsystem::GetRotation() {
-  return m_IMU.GetAngle() / 1_deg;
+units::degree_t DrivetrainSubsystem::GetRotationX() {
+  m_IMU.SetYawAxis(frc::ADIS16470_IMU::kX);
+  return m_IMU.GetAngle();
+}
+
+units::degree_t DrivetrainSubsystem::GetRotationY() {
+  m_IMU.SetYawAxis(frc::ADIS16470_IMU::kY);
+  return m_IMU.GetAngle();
+}
+
+units::degree_t DrivetrainSubsystem::GetRotationZ() {
+  m_IMU.SetYawAxis(frc::ADIS16470_IMU::kZ);
+  return m_IMU.GetAngle();
 }
 
 void DrivetrainSubsystem::ArcadeDriveF(double f) {
