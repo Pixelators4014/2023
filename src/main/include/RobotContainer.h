@@ -5,10 +5,14 @@
 #pragma once
 
 #include <frc/Joystick.h>
+#include <frc2/command/Commands.h>
 #include <frc2/command/Command.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/RunCommand.h>
+#include <frc/trajectory/TrajectoryGenerator.h>
+#include <frc/controller/PIDController.h>
+#include <frc2/command/RamseteCommand.h>
 
 #include <Constants.h>
 #include "subsystems/DrivetrainSubsystem.h"

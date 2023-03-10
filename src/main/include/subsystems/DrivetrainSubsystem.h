@@ -34,6 +34,28 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
     */
     void ResetEncoders();
 
+   /**
+   * Returns the currently-estimated pose of the robot.
+   *
+   * @return The pose.
+   */
+   frc::Pose2d GetPose();
+
+   /**
+   * Returns the current wheel speeds of the robot.
+   *
+   * @return The current wheel speeds.
+   */
+   frc::DifferentialDriveWheelSpeeds GetWheelSpeeds();
+
+   /**
+   * Controls each side of the drive directly with a voltage.
+   *
+   * @param left the commanded left output
+   * @param right the commanded right output
+   */
+   void TankDriveVolts(units::volt_t left, units::volt_t right);
+
     /**
     * Will be called periodically whenever the CommandScheduler runs.
     */

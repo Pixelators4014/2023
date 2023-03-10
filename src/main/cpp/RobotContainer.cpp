@@ -4,8 +4,6 @@
 
 #include "RobotContainer.h"
 
-#include <frc2/command/Commands.h>
-
 RobotContainer::RobotContainer() {
   ConfigureBindings();
 
@@ -18,5 +16,24 @@ RobotContainer::RobotContainer() {
 void RobotContainer::ConfigureBindings() {}
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-  return frc2::cmd::Print("No autonomous command configured");
+  frc::TrajectoryConfig config(AutoConstants::kMaxSpeed, AutoConstants::kMaxAcceleration);
+
+  auto trajectory = frc::TrajectoryGenerator::GenerateTrajectory(
+      frc::Pose2d{1_m, 2_m, 0_deg},
+      {frc::Translation2d{2_m, 3_m}, frc::Translation2d{3_m, 1_m}},
+      frc::Pose2d{4_m, 2_m, 0_deg},
+      config);
+  
+  // frc2::RamseteCommand ramseteCommand(
+  //     trajectory, [this] { return m_drive.GetPose(); },
+  //     frc::RamseteController{AutoConstants::kRamseteB,
+  //                            AutoConstants::kRamseteZeta},
+  //     frc::SimpleMotorFeedforward<units::meters>(
+  //         DriveConstants::ks, DriveConstants::kv, DriveConstants::ka),
+  //     DriveConstants::kDriveKinematics,
+  //     [this] { return m_drive.GetWheelSpeeds(); },
+  //     frc2::PIDController{DriveConstants::kPDriveVel, 0, 0},
+  //     frc2::PIDController{DriveConstants::kPDriveVel, 0, 0},
+  //     [this](auto left, auto right) { m_drive.TankDriveVolts(left, right); },
+  //     {&m_drive});
 }

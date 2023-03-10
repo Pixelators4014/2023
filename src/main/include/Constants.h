@@ -43,6 +43,7 @@
 #include <units/voltage.h>
 #include <units/volume.h>
 #include <units/constants.h>
+#include <frc/kinematics/DifferentialDriveKinematics.h>
 
 #include <ctre/Phoenix.h>
 
@@ -64,9 +65,24 @@ constexpr auto kRightFollower2ID = 16;
 constexpr auto kLeftMotorInverted = true;
 constexpr auto kRightMotorInverted = false;
 
+constexpr auto ks = 0.22_V;
+constexpr auto kv = 1.98 * 1_V / 1_mps;
+constexpr auto ka = 0.2 * 1_V / 1_mps_sq;
+
+constexpr double kPDriveVel = 8.5;
+
+extern frc::DifferentialDriveKinematics kDriveKinematics;
+
 constexpr auto kCountsPerRevolution = 2048;
 constexpr auto kWheelEncoderMetersPerUnit = units::meter_t{kWheelDiameter * units::constants::pi / (kCountsPerRevolution * kDrivetrainGearing)};
 constexpr auto kNeutralMode = NeutralMode::Coast;
+}
+
+namespace AutoConstants {
+constexpr auto kMaxSpeed = 3_mps;
+constexpr auto kMaxAcceleration = 3_mps_sq;
+constexpr auto kRamseteB = 2 * 1_rad * 1_rad / (1_m * 1_m);
+constexpr auto kRamseteZeta = 0.7 / 1_rad;
 }
 
 namespace ArmConstants {

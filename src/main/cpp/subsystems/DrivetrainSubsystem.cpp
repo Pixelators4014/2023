@@ -72,3 +72,18 @@ void DrivetrainSubsystem::ResetEncoders() {
   m_leftMaster.SetSelectedSensorPosition(0);
   m_rightMaster.SetSelectedSensorPosition(0);
 }
+
+frc::Pose2d DrivetrainSubsystem::GetPose() {
+  return m_odometry.GetPose();
+}
+
+frc::DifferentialDriveWheelSpeeds DrivetrainSubsystem::GetWheelSpeeds() {
+  return {m_leftMaster.GetSelectedSensorVelocity()*kWheelEncoderMetersPerUnit/1_s,
+          m_rightMaster.GetSelectedSensorVelocity()*kWheelEncoderMetersPerUnit/1_s};
+}
+
+void DrivetrainSubsystem::TankDriveVolts(units::volt_t left, units::volt_t right) {
+  m_leftMaster.SetVoltage(left);
+  m_rightMaster.SetVoltage(left);
+  m_drive.Feed();
+}
