@@ -50,7 +50,6 @@
 #pragma once
 
 namespace DriveConstants {
-constexpr auto kTrackwidth = 0.69_m;
 constexpr auto kDrivetrainGearing = 8.0;
 constexpr auto kMOI = 7.5_kg_sq_m;
 constexpr auto kMass = 60_kg;
@@ -83,6 +82,14 @@ constexpr auto kMaxSpeed = 3_mps;
 constexpr auto kMaxAcceleration = 3_mps_sq;
 constexpr auto kRamseteB = 2 * 1_rad * 1_rad / (1_m * 1_m);
 constexpr auto kRamseteZeta = 0.7 / 1_rad;
+
+constexpr auto kFP = 1;
+constexpr auto kFI = 1;
+constexpr auto kFD = 1;
+
+constexpr auto kRP = 1;
+constexpr auto kRI = 1;
+constexpr auto kRD = 1;
 }
 
 namespace ArmConstants {
@@ -100,5 +107,5 @@ constexpr auto kNeutralMode = NeutralMode::Coast;
 }
 
 namespace OIConstants {
-constexpr auto driverControllerPort = 1;
+constexpr auto driverControllerPort = 0;
 }

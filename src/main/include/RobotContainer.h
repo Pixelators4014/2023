@@ -14,6 +14,8 @@
 #include <frc/trajectory/TrajectoryGenerator.h>
 #include <frc/controller/PIDController.h>
 #include <frc2/command/RamseteCommand.h>
+#include <frc2/command/PIDCommand.h>
+
 
 #include <Constants.h>
 #include "subsystems/DrivetrainSubsystem.h"

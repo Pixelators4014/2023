@@ -68,6 +68,20 @@ void DrivetrainSubsystem::ArcadeDrive(double forward, double rotation) {
   m_drive.ArcadeDrive(forward, rotation);
 }
 
+double DrivetrainSubsystem::GetRotation() {
+  return m_IMU.GetAngle() / 1_deg;
+}
+
+void DrivetrainSubsystem::ArcadeDriveF(double f) {
+  forward = f;
+  m_drive.ArcadeDrive(forward, rotation);
+}
+
+void DrivetrainSubsystem::ArcadeDriveR(double r) {
+  rotation = r;
+  m_drive.ArcadeDrive(forward, rotation);
+}
+
 void DrivetrainSubsystem::ResetEncoders() {
   m_leftMaster.SetSelectedSensorPosition(0);
   m_rightMaster.SetSelectedSensorPosition(0);

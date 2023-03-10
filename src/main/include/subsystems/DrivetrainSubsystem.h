@@ -29,6 +29,10 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
     */
     void ArcadeDrive(double forward, double rotation);
 
+    void ArcadeDriveF(double forward);
+    
+    void ArcadeDriveR(double rotation);
+
     /**
     * Resets the drive encoders to a position of 0.
     */
@@ -40,6 +44,8 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
    * @return The pose.
    */
    frc::Pose2d GetPose();
+
+   double GetRotation();
 
    /**
    * Returns the current wheel speeds of the robot.
@@ -93,8 +99,10 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
       DriveConstants::kMOI,
       DriveConstants::kMass,
       DriveConstants::kWheelDiameter / 2,
-      DriveConstants::kTrackwidth,
+      DriveConstants::kTrackWidth,
       {0.001, 0.001, 0.001, 0.1, 0.1, 0.005, 0.005}};
 
    frc::Field2d m_fieldSim;
+
+   double forward, rotation;
 };

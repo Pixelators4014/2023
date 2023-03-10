@@ -37,5 +37,13 @@ frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
       [this](auto left, auto right) { m_drive.TankDriveVolts(left, right); },
       {&m_drive})};
 
+  frc2::CommandPtr RPIDCommand{frc2::PIDCommand(
+    frc::PIDController{AutoConstants::kFP,AutoConstants::kFI,AutoConstants::kFD},
+    [this] { return m_drive.GetRotation(); },
+    [this] { return 0.0; },
+    [this](auto r) { m_drive.ArcadeDriveR(r); },
+    {&m_drive}
+  )};
+
   return ramseteCommand;
 }
