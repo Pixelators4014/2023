@@ -47,13 +47,23 @@ void DrivetrainSubsystem::Periodic() {
 }
 
 void DrivetrainSubsystem::SimulationPeriodic() {
-    m_drivetrainSimulator.SetInputs(units::volt_t{m_leftMaster.Get()} *
-            frc::RobotController::GetInputVoltage(),
-        units::volt_t{m_rightMaster.Get()} *
-            frc::RobotController::GetInputVoltage());
-    m_drivetrainSimulator.Update(20_ms);
+  m_leftMasterSim.SetBusVoltage(frc::RobotController::GetInputVoltage());
+  m_rightMasterSim.SetBusVoltage(frc::RobotController::GetInputVoltage());
+  
+  m_drivetrainSimulator.SetInputs(
+    units::volt_t{m_leftMasterSim.GetMotorOutputLeadVoltage()},
+    units::volt_t{m_rightMasterSim.GetMotorOutputLeadVoltage()}
+  );
+  m_drivetrainSimulator.Update(20_ms);
 
-    m_IMUSim.SetGyroAngleY(-m_drivetrainSimulator.GetHeading().Degrees()); // make sure this is the right axis
+  m_leftMasterSim.SetIntegratedSensorRawPosition(_driveSim.GetLeftPosition()/kWheelEncoderMetersPerUnit);
+  m_leftMasterSim.SetIntegratedSensorVelocity(_driveSim.GetLeftVelocity()/kWheelEncoderMetersPerUnit);
+  m_rightMasterSim.SetIntegratedSensorRawPosition(_driveSim.GetRightPosition()/kWheelEncoderMetersPerUnit);
+  m_rightMasterSim.SetIntegratedSensorVelocity(_driveSim.GetRightVelocity()/kWheelEncoderMetersPerUnit);
+
+  m_IMUSim.SetGyroAngleY(-m_drivetrainSimulator.GetHeading().Degrees()); // make sure this is the right axis
+
+  
 }
 
 units::ampere_t DrivetrainSubsystem::GetCurrentDraw() const {
