@@ -14,6 +14,7 @@
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/RobotController.h>
+#include <frc2/command/button/JoystickButton.h>
 
 #include "Constants.h"
 
@@ -32,6 +33,8 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
     void ArcadeDriveF(double forward);
     
     void ArcadeDriveR(double rotation);
+    
+    void ResetOdometry();
 
     /**
     * Resets the drive encoders to a position of 0.
@@ -45,11 +48,7 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
    */
    frc::Pose2d GetPose();
 
-   units::degree_t GetRotationX();
-
-   units::degree_t GetRotationY();
-
-   units::degree_t GetRotationZ();
+   void SetNeutralMode(ctre::phoenix::motorcontrol::NeutralMode NeutralMode);
 
    /**
    * Returns the current wheel speeds of the robot.
@@ -66,6 +65,10 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
    */
    void TankDriveVolts(units::volt_t left, units::volt_t right);
 
+   void SetYawAxis(frc::ADIS16470_IMU::IMUAxis yaw_axis);
+
+   units::degree_t GetAngle();
+
     /**
     * Will be called periodically whenever the CommandScheduler runs.
     */
@@ -75,6 +78,7 @@ class DrivetrainSubsystem : public frc2::SubsystemBase {
     * Will be called periodically during simulation.
     */
     void SimulationPeriodic() override;
+
 
  private:
    WPI_TalonFX m_leftMaster{DriveConstants::kLeftMasterID};

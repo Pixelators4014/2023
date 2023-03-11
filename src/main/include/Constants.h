@@ -52,7 +52,7 @@
 namespace DriveConstants {
 constexpr auto kDrivetrainGearing = 8.0;
 constexpr auto kMOI = 7.5_kg_sq_m;
-constexpr auto kMass = 60_kg;
+constexpr auto kMass = 30_kg;
 constexpr auto kWheelDiameter = 6_in;
 constexpr auto kTrackWidth = 0.7112_m;
 constexpr auto kLeftMasterID = 11;
@@ -83,15 +83,17 @@ constexpr auto kMaxAcceleration = 3_mps_sq;
 constexpr auto kRamseteB = 2 * 1_rad * 1_rad / (1_m * 1_m);
 constexpr auto kRamseteZeta = 0.7 / 1_rad;
 
-constexpr auto kFP = 1;
-constexpr auto kFI = 1;
-constexpr auto kFD = 1;
+// values docs: .1,.1,.2 very strong reistance force but overcomponsated for a slightly bent platform ( looks like it will oscolate on the real platform )
 
-constexpr auto kRP = 1;
-constexpr auto kRI = 1;
-constexpr auto kRD = 1;
+constexpr auto kFP = .003;
+constexpr auto kFI = .001;
+constexpr auto kFD = .001;
 
-constexpr auto kMotorStrength = 1;
+constexpr auto kRP = .003;
+constexpr auto kRI = .001;
+constexpr auto kRD = .001;
+
+constexpr auto kMotorStrength = .62;
 }
 
 namespace ArmConstants {
@@ -110,4 +112,7 @@ constexpr auto kNeutralMode = NeutralMode::Coast;
 
 namespace OIConstants {
 constexpr auto driverControllerPort = 0;
+constexpr auto driverControllerHalfRotationSpeedButton = 1;
+constexpr auto driverControllerBrakeModeButton = 7;
+constexpr auto driverControllerCoastModeButton = 8;
 }

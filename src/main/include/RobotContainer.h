@@ -15,7 +15,7 @@
 #include <frc/controller/PIDController.h>
 #include <frc2/command/RamseteCommand.h>
 #include <frc2/command/PIDCommand.h>
-
+#include <math.h>
 
 #include <Constants.h>
 #include "subsystems/DrivetrainSubsystem.h"

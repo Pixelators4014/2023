@@ -65,37 +65,39 @@ void DrivetrainSubsystem::SimulationPeriodic() {
 }
 
 void DrivetrainSubsystem::ArcadeDrive(double forward, double rotation) {
-  m_drive.ArcadeDrive(forward, rotation);
-}
-
-units::degree_t DrivetrainSubsystem::GetRotationX() {
-  m_IMU.SetYawAxis(frc::ADIS16470_IMU::kX);
-  return m_IMU.GetAngle();
-}
-
-units::degree_t DrivetrainSubsystem::GetRotationY() {
-  m_IMU.SetYawAxis(frc::ADIS16470_IMU::kY);
-  return m_IMU.GetAngle();
-}
-
-units::degree_t DrivetrainSubsystem::GetRotationZ() {
-  m_IMU.SetYawAxis(frc::ADIS16470_IMU::kZ);
-  return m_IMU.GetAngle();
+  m_drive.ArcadeDrive(forward, rotation, false);
 }
 
 void DrivetrainSubsystem::ArcadeDriveF(double f) {
   forward = f;
-  m_drive.ArcadeDrive(forward, rotation);
+  m_drive.ArcadeDrive(forward, rotation, false);
 }
 
 void DrivetrainSubsystem::ArcadeDriveR(double r) {
   rotation = r;
-  m_drive.ArcadeDrive(forward, rotation);
+  m_drive.ArcadeDrive(forward, rotation, false);
+}
+
+void DrivetrainSubsystem::SetNeutralMode(ctre::phoenix::motorcontrol::NeutralMode NeutralMode) {
+  m_leftMaster.SetNeutralMode(NeutralMode);
+  m_leftFollower1.SetNeutralMode(NeutralMode);
+  m_leftFollower2.SetNeutralMode(NeutralMode);
+  m_rightMaster.SetNeutralMode(NeutralMode);
+  m_rightFollower1.SetNeutralMode(NeutralMode);
+  m_rightFollower2.SetNeutralMode(NeutralMode);
 }
 
 void DrivetrainSubsystem::ResetEncoders() {
   m_leftMaster.SetSelectedSensorPosition(0);
   m_rightMaster.SetSelectedSensorPosition(0);
+}
+
+void DrivetrainSubsystem::SetYawAxis(frc::ADIS16470_IMU::IMUAxis yaw_axis) {
+  m_IMU.SetYawAxis(yaw_axis);
+}
+
+units::degree_t DrivetrainSubsystem::GetAngle() {
+  return m_IMU.GetAngle();
 }
 
 frc::Pose2d DrivetrainSubsystem::GetPose() {
@@ -111,4 +113,9 @@ void DrivetrainSubsystem::TankDriveVolts(units::volt_t left, units::volt_t right
   m_leftMaster.SetVoltage(left);
   m_rightMaster.SetVoltage(left);
   m_drive.Feed();
+}
+
+void DrivetrainSubsystem::ResetOdometry(){
+  ResetEncoders();
+  m_odometry.ResetPosition(0_deg,0_m,0_m,frc::Pose2d{0_m,0_m,0_deg});
 }
