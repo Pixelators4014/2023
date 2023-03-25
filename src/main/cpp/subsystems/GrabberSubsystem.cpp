@@ -4,7 +4,20 @@
 
 #include "subsystems/GrabberSubsystem.h"
 
-GrabberSubsystem::GrabberSubsystem() = default;
+using namespace GrabberConstants;
+
+GrabberSubsystem::GrabberSubsystem() {
+    m_leftMotor.SetInverted(kLeftInverted);
+    m_rightMotor.SetInverted(kRightInverted);
+
+    m_leftMotor.SetIdleMode(kNeutralMode);
+    m_rightMotor.SetIdleMode(kNeutralMode);
+}
+
+void GrabberSubsystem::setSpeed(double speed){
+    m_leftMotor.Set(speed);
+    m_rightMotor.Set(speed);
+}
 
 // This method will be called once per scheduler run
 void GrabberSubsystem::Periodic() {}

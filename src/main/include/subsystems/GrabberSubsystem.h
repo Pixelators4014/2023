@@ -5,6 +5,9 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include <rev/CANSparkMax.h>
+
+#include "Constants.h"
 
 class GrabberSubsystem : public frc2::SubsystemBase {
  public:
@@ -15,7 +18,11 @@ class GrabberSubsystem : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
+  void setSpeed(double speed);
+
  private:
+  rev::CANSparkMax m_leftMotor{GrabberConstants::kLeftID, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_rightMotor{GrabberConstants::kRightID, rev::CANSparkMax::MotorType::kBrushless};
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };

@@ -46,6 +46,7 @@
 #include <frc/kinematics/DifferentialDriveKinematics.h>
 
 #include <ctre/Phoenix.h>
+#include <rev/CANSparkMax.h>
 
 #pragma once
 
@@ -108,6 +109,16 @@ constexpr auto kL3 = 0.1_m;
 constexpr auto kL4 = 0.1_m;
 
 constexpr auto kNeutralMode = NeutralMode::Coast;
+}
+
+namespace GrabberConstants {
+constexpr auto kLeftID = 21;
+constexpr auto kRightID = 22;
+
+constexpr auto kLeftInverted = false;
+constexpr auto kRightInverted = false;
+
+constexpr auto kNeutralMode = rev::CANSparkMax::IdleMode::kBrake;
 }
 
 namespace OIConstants {
