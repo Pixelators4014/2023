@@ -17,8 +17,9 @@
 #include <frc2/command/PIDCommand.h>
 #include <math.h>
 
-#include <Constants.h>
+#include "Constants.h"
 #include "subsystems/DrivetrainSubsystem.h"
+#include "subsystems/GrabberSubsystem.h"
 
 class RobotContainer {
  public:
@@ -29,6 +30,8 @@ class RobotContainer {
  private:
 
   frc::Joystick m_driverController{OIConstants::driverControllerPort};
+  frc::Joystick m_operatorController{OIConstants::operatorControllerPort};
   DrivetrainSubsystem m_drive;
+  GrabberSubsystem m_grabber;
   void ConfigureBindings();
 };

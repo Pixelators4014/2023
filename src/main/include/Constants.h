@@ -123,6 +123,7 @@ constexpr auto kNeutralMode = rev::CANSparkMax::IdleMode::kBrake;
 
 namespace OIConstants {
 constexpr auto driverControllerPort = 0;
+constexpr auto operatorControllerPort = 1;
 constexpr auto driverControllerHalfRotationSpeedButton = 1;
 constexpr auto driverControllerBrakeModeButton = 7;
 constexpr auto driverControllerCoastModeButton = 8;
