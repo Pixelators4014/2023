@@ -31,8 +31,8 @@ void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double
 {
     double ArrayA[64];
     double ArrayB[32];
-    A(ArrayA, m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(), 0, 0, 0, 0, 0, 0, 0, 0);
-    B(ArrayB, m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(), 0, 0, 0, 0, 0, 0, 0, 0);
+    A(ArrayA, m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(), tau[0], tau[1], tau[2], tau[3]);
+    B(ArrayB, m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(), tau[0], tau[1], tau[2], tau[3]);
 
     Eigen::Map<Eigen::Matrix<double, 8, 8, Eigen::RowMajor>> MatrixA(ArrayA);
     Eigen::Map<Eigen::Matrix<double, 8, 4, Eigen::RowMajor>> MatrixB(ArrayB);
@@ -45,7 +45,7 @@ void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double
     frc::Vectord<8> x{m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(),m_J1.GetSelectedSensorVelocity(),m_encoderJ2.GetRate(),m_encoderJ3.GetRate(),m_encoderJ4.GetRate()};
     frc::Vectord<8> nextR{theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0};
 
-    LQR.Calculate(x,nextR);
+    tau = LQR.Calculate(x,nextR);
 }
 // frc::Pose3d ArmSubsystem::GetPosition(double θ1, double θ2, double θ3, double θ4)
 // {
