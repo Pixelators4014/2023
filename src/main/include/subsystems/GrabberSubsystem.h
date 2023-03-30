@@ -28,6 +28,6 @@ class GrabberSubsystem : public frc2::SubsystemBase {
   rev::CANSparkMax m_rightMotor{GrabberConstants::kRightID, rev::CANSparkMax::MotorType::kBrushless};
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  frc::DoubleSolenoid m_leftPiston{kPHID, frc::PneumaticsModuleType::REVPH, GrabberConstants::kLeftPiston1ID, GrabberConstants::kLeftPiston2ID};
-  frc::DoubleSolenoid m_rightPiston{kPHID, frc::PneumaticsModuleType::REVPH, GrabberConstants::kRightPiston1ID, GrabberConstants::kRightPiston2ID};
+  frc::DoubleSolenoid m_leftPiston{GrabberConstants::kPHID, frc::PneumaticsModuleType::REVPH, GrabberConstants::kLeftPiston1ID, GrabberConstants::kLeftPiston2ID};
+  frc::DoubleSolenoid m_rightPiston{GrabberConstants::kPHID, frc::PneumaticsModuleType::REVPH, GrabberConstants::kRightPiston1ID, GrabberConstants::kRightPiston2ID};
 };

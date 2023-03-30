@@ -118,8 +118,8 @@ constexpr auto kFreeSpeed = 5820_rpm;
 }
 
 namespace GrabberConstants {
-constexpr auto kLeftID = 21;
-constexpr auto kRightID = 22;
+constexpr auto kLeftID = 30;
+constexpr auto kRightID = 31;
 
 constexpr auto kLeftInverted = false;
 constexpr auto kRightInverted = false;
@@ -129,7 +129,7 @@ constexpr auto kLeftPiston2ID = 1;
 constexpr auto kRightPiston1ID = 2;
 constexpr auto kRightPiston2ID = 3;
 
-constexpr auto kPHID = 35;
+constexpr auto kPHID = 32;
 
 constexpr auto kNeutralMode = rev::CANSparkMax::IdleMode::kBrake;
 }
