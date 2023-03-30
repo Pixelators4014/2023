@@ -9,15 +9,14 @@ using namespace ArmConstants;
 ArmSubsystem::ArmSubsystem()
 {
     m_J1.ConfigFactoryDefault();
-    m_J2.ConfigFactoryDefault();
-    m_J3.ConfigFactoryDefault();
-    m_J4.ConfigFactoryDefault();
 
-    m_J1.SetNeutralMode(kNeutralMode);
-    m_J2.SetNeutralMode(kNeutralMode);
-    m_J3.SetNeutralMode(kNeutralMode);
-    m_J4.SetNeutralMode(kNeutralMode);
+    m_J1.SetNeutralMode(kFalconNeutralMode);
+    m_J2.SetIdleMode(kRevNeutralMode);
+    m_J3.SetIdleMode(kRevNeutralMode);
+    m_J4.SetIdleMode(kRevNeutralMode);
 };
+
+
 
 // frc::Pose3d ArmSubsystem::GetPosition(double θ1, double θ2, double θ3, double θ4)
 // {

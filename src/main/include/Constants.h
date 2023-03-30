@@ -108,7 +108,8 @@ constexpr auto kL2 = 0.1_m;
 constexpr auto kL3 = 0.1_m;
 constexpr auto kL4 = 0.1_m;
 
-constexpr auto kNeutralMode = NeutralMode::Coast;
+constexpr auto kFalconNeutralMode = NeutralMode::Break;
+constexpr auto kRevNeutralMode = rev::CANSparkMax::IdleMode::kBrake;
 }
 
 namespace GrabberConstants {
