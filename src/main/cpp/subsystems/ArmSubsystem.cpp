@@ -29,21 +29,23 @@ void ArmSubsystem::moveTo(double x, double y, double z)
 
 void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double theta_4)
 {
-    // double ArrayA[64];
-    // double ArrayB[32];
-    // A(ArrayA, theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0, 0, 0, 0, 0);
-    // B(ArrayB, theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0, 0, 0, 0, 0);
+    double ArrayA[64];
+    double ArrayB[32];
+    A(ArrayA, m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(), 0, 0, 0, 0, 0, 0, 0, 0);
+    B(ArrayB, m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(), 0, 0, 0, 0, 0, 0, 0, 0);
 
-    // Eigen::Map<Eigen::Matrix<double, 8, 8, Eigen::RowMajor>> MatrixA(ArrayA);
-    // Eigen::Map<Eigen::Matrix<double, 8, 4, Eigen::RowMajor>> MatrixB(ArrayB);
-    // frc::Matrixd<8, 8> MatrixA;
-    // frc::Matrixd<8, 4> MatrixB;
+    Eigen::Map<Eigen::Matrix<double, 8, 8, Eigen::RowMajor>> MatrixA(ArrayA);
+    Eigen::Map<Eigen::Matrix<double, 8, 4, Eigen::RowMajor>> MatrixB(ArrayB);
 
-    // frc::Matrixd<8, 8> Q = frc::MakeCostMatrix(Qelems);
-    // frc::Matrixd<4, 4> R = frc::MakeCostMatrix(Relems);
+    frc::Matrixd<8, 8> Q = frc::MakeCostMatrix(std::array{0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1});
+    frc::Matrixd<4, 4> R = frc::MakeCostMatrix(std::array{0.1, 0.1, 0.1, 0.1});
 
-    // frc::LinearQuadraticRegulator<8,4> LQR{MatrixA,MatrixB,Q,R, 20_ms};
-    // LQR.Calculate();
+    frc::LinearQuadraticRegulator<8,4> LQR{MatrixA,MatrixB,Q,R, 20_ms};
+
+    frc::Vectord<8> x{m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(),m_J1.GetSelectedSensorVelocity(),m_encoderJ2.GetRate(),m_encoderJ3.GetRate(),m_encoderJ4.GetRate()};
+    frc::Vectord<8> nextR{theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0};
+
+    LQR.Calculate(x,nextR);
 }
 // frc::Pose3d ArmSubsystem::GetPosition(double θ1, double θ2, double θ3, double θ4)
 // {
