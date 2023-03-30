@@ -31,6 +31,8 @@ class ArmSubsystem : public frc2::SubsystemBase {
 
   void moveTo(double theta_1, double theta_2, double theta_3, double theta_4);
 
+  void moveTo(double x, double y, double z);
+
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

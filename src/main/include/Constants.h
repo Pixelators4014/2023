@@ -103,10 +103,9 @@ constexpr auto kJ2ID = 1;
 constexpr auto kJ3ID = 2;
 constexpr auto kJ4ID = 3;
 
-constexpr auto kL1 = 0.1_m;
-constexpr auto kL2 = 0.1_m;
-constexpr auto kL3 = 0.1_m;
-constexpr auto kL4 = 0.1_m;
+constexpr auto kL1 = 0.8636;
+constexpr auto kL2 = 0.8636;
+constexpr auto kL3 = 0.8636;
 
 constexpr auto kFalconNeutralMode = NeutralMode::Brake;
 constexpr auto kRevNeutralMode = rev::CANSparkMax::IdleMode::kBrake;
