@@ -29,18 +29,20 @@ void ArmSubsystem::moveTo(double x, double y, double z)
 
 void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double theta_4)
 {
-    double ArrayA[64];
-    double ArrayB[32];
-    A(ArrayA, theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0, 0, 0, 0, 0);
-    B(ArrayB, theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0, 0, 0, 0, 0);
+    // double ArrayA[64];
+    // double ArrayB[32];
+    // A(ArrayA, theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0, 0, 0, 0, 0);
+    // B(ArrayB, theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0, 0, 0, 0, 0);
 
-    Eigen::Map<Eigen::Matrix<double, 8, 8, Eigen::RowMajor>> MatrixA(ArrayA);
-    Eigen::Map<Eigen::Matrix<double, 8, 4, Eigen::RowMajor>> MatrixB(ArrayB);
+    // Eigen::Map<Eigen::Matrix<double, 8, 8, Eigen::RowMajor>> MatrixA(ArrayA);
+    // Eigen::Map<Eigen::Matrix<double, 8, 4, Eigen::RowMajor>> MatrixB(ArrayB);
+    // frc::Matrixd<8, 8> MatrixA;
+    // frc::Matrixd<8, 4> MatrixB;
 
-    frc::Matrixd<8, 8> Q = frc::MakeCostMatrix(Qelems);
-    frc::Matrixd<4, 4> R = frc::MakeCostMatrix(Relems);
+    // frc::Matrixd<8, 8> Q = frc::MakeCostMatrix(Qelems);
+    // frc::Matrixd<4, 4> R = frc::MakeCostMatrix(Relems);
 
-    frc::LinearQuadraticRegulator<8,4> LQR{MatrixA,MatrixB,Q,R, 20_ms};
+    // frc::LinearQuadraticRegulator<8,4> LQR{MatrixA,MatrixB,Q,R, 20_ms};
     // LQR.Calculate();
 }
 // frc::Pose3d ArmSubsystem::GetPosition(double θ1, double θ2, double θ3, double θ4)
