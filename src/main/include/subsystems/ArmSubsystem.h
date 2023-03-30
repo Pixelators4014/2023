@@ -33,6 +33,8 @@ class ArmSubsystem : public frc2::SubsystemBase {
 
   void moveTo(double x, double y, double z);
 
+  units::volt_t torqueToVoltage(units::newton_meter_t torque, units::radians_per_second_t speed);
+
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

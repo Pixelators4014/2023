@@ -112,6 +112,9 @@ constexpr auto Relems = 12.0;
 
 constexpr auto kFalconNeutralMode = NeutralMode::Brake;
 constexpr auto kRevNeutralMode = rev::CANSparkMax::IdleMode::kBrake;
+
+constexpr auto kStallTorque = 3.28_Nm;
+constexpr auto kFreeSpeed = 5820_rpm;
 }
 
 namespace GrabberConstants {

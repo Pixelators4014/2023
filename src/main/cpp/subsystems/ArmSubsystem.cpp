@@ -47,6 +47,17 @@ void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double
 
     tau = LQR.Calculate(x,nextR);
 }
+
+units::volt_t ArmSubsystem::torqueToVoltage(units::newton_meter_t torque, units::radians_per_second_t speed) {
+    // Torque = (Slope * Speed) + (Stall Torque * Applied Voltage / 12 volts)
+    // Slope = -Stall Torque / Free Load Speed
+    // Torque = (-Stall Torque / Free Load Speed * Speed) + (Stall Torque * Applied Voltage / 12 volts)
+    // Stall Torque * Applied Voltage / 12 volts = Torque + Stall Torque / Free Load Speed * Speed
+    // Applied Voltage = (Torque + Stall Torque / Free Load Speed * Speed) / (Stall Torque / 12 volts) = (Torque + Stall Torque / Free Load Speed * Speed) * 12 volts / Stall Torque = (torque/kStallTorque + speed / kFreeSpeed) * 12_V;
+    // return (torque + kStallTorque / kFreeSpeed * speed) * 12_V / kStallTorque;
+    return (torque / kStallTorque + speed / kFreeSpeed) * 12_V;
+}
+
 // frc::Pose3d ArmSubsystem::GetPosition(double θ1, double θ2, double θ3, double θ4)
 // {
 //     units::meter_t x=sin(θ1)*sin(θ2)*kL2+(cos(θ3)*sin(θ1)*sin(θ2)+cos(θ2)*sin(θ1)*sin(θ3))*kL3+(cos(θ4)*(cos(θ3)*sin(θ1)*sin(θ2)+cos(θ2)*sin(θ1)*sin(θ3))-(-cos(θ2)*cos(θ3)*sin(θ1)+sin(θ1)*sin(θ2)*sin(θ3)))*kL4;
