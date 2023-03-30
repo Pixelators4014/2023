@@ -11,6 +11,8 @@
 #include <frc/geometry/Rotation3d.h>
 #include <frc/Encoder.h>
 
+#include <rev/CANSparkMax.h>
+
 #include "Constants.h"
 
 class ArmSubsystem : public frc2::SubsystemBase {
@@ -27,13 +29,12 @@ class ArmSubsystem : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  frc::Encoder m_encoderJ1{0, 1};
   frc::Encoder m_encoderJ2{0, 1};
   frc::Encoder m_encoderJ3{0, 1};
   frc::Encoder m_encoderJ4{0, 1};
 
   WPI_TalonFX m_J1{ArmConstants::kJ1ID};
-  WPI_TalonFX m_J2{ArmConstants::kJ2ID};
-  WPI_TalonFX m_J3{ArmConstants::kJ3ID};
-  WPI_TalonFX m_J4{ArmConstants::kJ4ID};
+  rev::CANSparkMax m_J2{ArmConstants::kJ2ID, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_J3{ArmConstants::kJ3ID, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_J4{ArmConstants::kJ4ID, rev::CANSparkMax::MotorType::kBrushless};
 };
