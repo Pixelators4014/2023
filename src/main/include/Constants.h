@@ -124,8 +124,12 @@ constexpr auto kRightID = 22;
 constexpr auto kLeftInverted = false;
 constexpr auto kRightInverted = false;
 
-constexpr auto kPiston1ID = 0;
-constexpr auto kPiston2ID = 1;
+constexpr auto kLeftPiston1ID = 0;
+constexpr auto kLeftPiston2ID = 1;
+constexpr auto kRightPiston1ID = 2;
+constexpr auto kRightPiston2ID = 3;
+
+constexpr auto kPHID = 35;
 
 constexpr auto kNeutralMode = rev::CANSparkMax::IdleMode::kBrake;
 }

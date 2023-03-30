@@ -6,7 +6,7 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <rev/CANSparkMax.h>
-#include <frc/Solenoid.h>
+#include <frc/DoubleSolenoid.h>
 
 #include "Constants.h"
 
@@ -21,13 +21,13 @@ class GrabberSubsystem : public frc2::SubsystemBase {
 
   void setSpeed(double speed);
 
-  void setPiston(bool state);
+  void setPiston(frc::DoubleSolenoid::Value state);
 
  private:
   rev::CANSparkMax m_leftMotor{GrabberConstants::kLeftID, rev::CANSparkMax::MotorType::kBrushless};
   rev::CANSparkMax m_rightMotor{GrabberConstants::kRightID, rev::CANSparkMax::MotorType::kBrushless};
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  frc::Solenoid m_piston1{frc::PneumaticsModuleType::REVPH, GrabberConstants::kPiston1ID};
-  frc::Solenoid m_piston2{frc::PneumaticsModuleType::REVPH, GrabberConstants::kPiston2ID};
+  frc::DoubleSolenoid m_leftPiston{kPHID, frc::PneumaticsModuleType::REVPH, GrabberConstants::kLeftPiston1ID, GrabberConstants::kLeftPiston2ID};
+  frc::DoubleSolenoid m_rightPiston{kPHID, frc::PneumaticsModuleType::REVPH, GrabberConstants::kRightPiston1ID, GrabberConstants::kRightPiston2ID};
 };
