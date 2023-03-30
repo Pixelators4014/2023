@@ -29,10 +29,16 @@ void ArmSubsystem::moveTo(double x, double y, double z)
 
 void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double theta_4)
 {
-    double MatrixA[64];
-    double MatrixB[32];
-    A(MatrixA, theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0, 0, 0, 0, 0);
-    B(MatrixB, theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0, 0, 0, 0, 0);
+    double ArrayA[64];
+    double ArrayB[32];
+    A(ArrayA, theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0, 0, 0, 0, 0);
+    B(ArrayB, theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    frc::Matrixd<8,8> MatrixA{ArrayA};
+    frc::Matrixd<8,4> MatrixB{ArrayB};
+
+    // frc::LinearQuadraticRegulator<8,4> LQR{MatrixA,MatrixB,Qelems,Relems, 20_ms};
+    // LQR.Calculate();
 }
 // frc::Pose3d ArmSubsystem::GetPosition(double θ1, double θ2, double θ3, double θ4)
 // {

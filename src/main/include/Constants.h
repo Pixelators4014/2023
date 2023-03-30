@@ -107,6 +107,9 @@ constexpr auto kL1 = 0.8636;
 constexpr auto kL2 = 0.8636;
 constexpr auto kL3 = 0.8636;
 
+constexpr auto Qelems = 8.0;
+constexpr auto Relems = 12.0;
+
 constexpr auto kFalconNeutralMode = NeutralMode::Brake;
 constexpr auto kRevNeutralMode = rev::CANSparkMax::IdleMode::kBrake;
 }
