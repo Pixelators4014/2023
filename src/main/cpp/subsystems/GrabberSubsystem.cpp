@@ -19,9 +19,10 @@ void GrabberSubsystem::setSpeed(double speed){
     m_rightMotor.Set(speed);
 }
 
-// void GrabberSubsystem::activatePiston(){
-//     m_piston.Set(true);
-// }
+void GrabberSubsystem::setPiston(bool state){
+    m_piston1.Set(state);
+    m_piston2.Set(state);
+}
 
 // This method will be called once per scheduler run
 void GrabberSubsystem::Periodic() {}
