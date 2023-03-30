@@ -108,7 +108,7 @@ constexpr auto kL2 = 0.1_m;
 constexpr auto kL3 = 0.1_m;
 constexpr auto kL4 = 0.1_m;
 
-constexpr auto kFalconNeutralMode = NeutralMode::Break;
+constexpr auto kFalconNeutralMode = NeutralMode::Brake;
 constexpr auto kRevNeutralMode = rev::CANSparkMax::IdleMode::kBrake;
 }
 
