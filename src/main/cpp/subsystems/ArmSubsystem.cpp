@@ -46,6 +46,11 @@ void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double
     frc::Vectord<8> nextR{theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0};
 
     tau = LQR.Calculate(x,nextR);
+
+    m_J1.SetVoltage(torqueToVoltage(tau[0]*1_Nm,m_J1.GetSelectedSensorVelocity()*1_rad_per_s));
+    m_J2.SetVoltage(torqueToVoltage(tau[1]*1_Nm,m_encoderJ2.GetRate()*1_rad_per_s));
+    m_J3.SetVoltage(torqueToVoltage(tau[2]*1_Nm,m_encoderJ3.GetRate()*1_rad_per_s));
+    m_J4.SetVoltage(torqueToVoltage(tau[3]*1_Nm,m_encoderJ4.GetRate()*1_rad_per_s));
 }
 
 units::volt_t ArmSubsystem::torqueToVoltage(units::newton_meter_t torque, units::radians_per_second_t speed) {
