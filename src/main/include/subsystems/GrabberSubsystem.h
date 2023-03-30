@@ -20,6 +20,8 @@ class GrabberSubsystem : public frc2::SubsystemBase {
 
   void setSpeed(double speed);
 
+  void activatePiston();
+
  private:
   rev::CANSparkMax m_leftMotor{GrabberConstants::kLeftID, rev::CANSparkMax::MotorType::kBrushless};
   rev::CANSparkMax m_rightMotor{GrabberConstants::kRightID, rev::CANSparkMax::MotorType::kBrushless};

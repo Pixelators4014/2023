@@ -28,6 +28,9 @@
     "functional": "cpp",
     "tuple": "cpp",
     "utility": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "string": "cpp",
+    "string_view": "cpp",
+    "span": "cpp"
   }
 }
