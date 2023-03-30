@@ -10,10 +10,13 @@
 #include <frc/geometry/Translation3d.h>
 #include <frc/geometry/Rotation3d.h>
 #include <frc/Encoder.h>
+#include <frc/controller/LinearQuadraticRegulator.h>
 
 #include <rev/CANSparkMax.h>
 
 #include "Constants.h"
+#include "A.h"
+#include "B.h"
 
 class ArmSubsystem : public frc2::SubsystemBase {
  public:
@@ -24,7 +27,9 @@ class ArmSubsystem : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
-  frc::Pose3d GetPosition(double theta_1, double theta_2, double theta_3, double theta_4);
+  // frc::Pose3d GetPosition(double theta_1, double theta_2, double theta_3, double theta_4);
+
+  void moveTo(double theta_1, double theta_2, double theta_3, double theta_4);
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
