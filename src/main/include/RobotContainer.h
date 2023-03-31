@@ -15,7 +15,9 @@
 #include <frc/controller/PIDController.h>
 #include <frc2/command/RamseteCommand.h>
 #include <frc2/command/PIDCommand.h>
+#include <frc/PneumaticHub.h>
 #include <math.h>
+
 
 #include "Constants.h"
 #include "subsystems/DrivetrainSubsystem.h"
@@ -32,6 +34,8 @@ class RobotContainer {
   frc::Joystick m_driverController{OIConstants::driverControllerPort};
   frc::Joystick m_operatorController{OIConstants::operatorControllerPort};
   DrivetrainSubsystem m_drive;
+  // ArmSubsystem m_arm;
   GrabberSubsystem m_grabber;
+  frc::PneumaticHub m_ph{Pnumatics::kPHID};
   void ConfigureBindings();
 };

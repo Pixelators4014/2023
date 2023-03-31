@@ -8,8 +8,6 @@
 
 #include <frc/TimedRobot.h>
 #include <frc2/command/CommandPtr.h>
-#include <frc/PneumaticHub.h>
-#include "Constants.h"
 
 #include "RobotContainer.h"
 
@@ -33,5 +31,4 @@ class Robot : public frc::TimedRobot {
  private:
   std::optional<frc2::CommandPtr> m_autonomousCommand;
   RobotContainer m_container;
-  frc::PneumaticHub m_ph{Pnumatics::kPHID};
 };

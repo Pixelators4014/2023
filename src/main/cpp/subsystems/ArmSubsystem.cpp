@@ -31,8 +31,8 @@ void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double
 {
     double ArrayA[64];
     double ArrayB[32];
-    A(ArrayA, m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(), tau[0], tau[1], tau[2], tau[3]);
-    B(ArrayB, m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(), tau[0], tau[1], tau[2], tau[3]);
+    A(ArrayA, m_J1.GetSelectedSensorPosition(),m_J2.GetEncoder().GetPosition(),m_J3.GetEncoder().GetPosition(),m_J4.GetEncoder().GetPosition(), tau[0], tau[1], tau[2], tau[3]);
+    B(ArrayB, m_J1.GetSelectedSensorPosition(),m_J2.GetEncoder().GetPosition(),m_J3.GetEncoder().GetPosition(),m_J4.GetEncoder().GetPosition(), tau[0], tau[1], tau[2], tau[3]);
 
     Eigen::Map<Eigen::Matrix<double, 8, 8, Eigen::RowMajor>> MatrixA(ArrayA);
     Eigen::Map<Eigen::Matrix<double, 8, 4, Eigen::RowMajor>> MatrixB(ArrayB);
@@ -42,15 +42,15 @@ void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double
 
     frc::LinearQuadraticRegulator<8,4> LQR{MatrixA,MatrixB,Q,R, 20_ms};
 
-    frc::Vectord<8> x{m_J1.GetSelectedSensorPosition(),m_encoderJ2.Get(),m_encoderJ3.Get(),m_encoderJ4.Get(),m_J1.GetSelectedSensorVelocity(),m_encoderJ2.GetRate(),m_encoderJ3.GetRate(),m_encoderJ4.GetRate()};
+    frc::Vectord<8> x{m_J1.GetSelectedSensorPosition(),m_J2.GetEncoder().GetPosition(),m_J3.GetEncoder().GetPosition(),m_J4.GetEncoder().GetPosition(),m_J1.GetSelectedSensorVelocity(),m_J2.GetEncoder().GetVelocity(),m_J3.GetEncoder().GetVelocity(),m_J4.GetEncoder().GetVelocity()};
     frc::Vectord<8> nextR{theta_1, theta_2, theta_3, theta_4, 0, 0, 0, 0};
 
     tau = LQR.Calculate(x,nextR);
 
     m_J1.SetVoltage(torqueToVoltage(tau[0]*1_Nm,m_J1.GetSelectedSensorVelocity()*1_rad_per_s));
-    m_J2.SetVoltage(torqueToVoltage(tau[1]*1_Nm,m_encoderJ2.GetRate()*1_rad_per_s));
-    m_J3.SetVoltage(torqueToVoltage(tau[2]*1_Nm,m_encoderJ3.GetRate()*1_rad_per_s));
-    m_J4.SetVoltage(torqueToVoltage(tau[3]*1_Nm,m_encoderJ4.GetRate()*1_rad_per_s));
+    m_J2.SetVoltage(torqueToVoltage(tau[1]*1_Nm,m_J2.GetEncoder().GetVelocity()*1_rad_per_s));
+    m_J3.SetVoltage(torqueToVoltage(tau[2]*1_Nm,m_J3.GetEncoder().GetVelocity()*1_rad_per_s));
+    m_J4.SetVoltage(torqueToVoltage(tau[3]*1_Nm,m_J4.GetEncoder().GetVelocity()*1_rad_per_s));
 }
 
 void ArmSubsystem::PIDMoveTo(double theta_1, double theta_2, double theta_3, double theta_4) {

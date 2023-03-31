@@ -44,11 +44,7 @@ class ArmSubsystem : public frc2::SubsystemBase {
   rev::CANSparkMax m_J3{ArmConstants::kJ3ID, rev::CANSparkMax::MotorType::kBrushless};
   rev::CANSparkMax m_J4{ArmConstants::kJ4ID, rev::CANSparkMax::MotorType::kBrushless};
 
-  rev::SparkMaxPIDController m_J2PIDController;
-  rev::SparkMaxPIDController m_J3PIDController;
-  rev::SparkMaxPIDController m_J4PIDController;
-
-  frc2::PIDController test{};
+  frc2::PIDController m_PID{GrabberConstants::kP, GrabberConstants::kI, GrabberConstants::kD};
 
   frc::Vectord<4> tau;
 };

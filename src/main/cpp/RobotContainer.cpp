@@ -7,6 +7,8 @@
 RobotContainer::RobotContainer() {
   ConfigureBindings();
 
+  m_ph.EnableCompressorAnalog(Pnumatics::minPressure,Pnumatics::maxPressure);
+
   m_drive.SetDefaultCommand(frc2::RunCommand([this] {
     m_drive.ArcadeDrive(-m_driverController.GetY(),-m_driverController.GetX()*(m_driverController.GetRawButton(OIConstants::driverControllerHalfRotationSpeedButton)?1:.5));
     m_grabber.setSpeed(m_operatorController.GetY());
