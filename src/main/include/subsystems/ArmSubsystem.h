@@ -36,6 +36,8 @@ class ArmSubsystem : public frc2::SubsystemBase {
 
   void PIDMoveTo(double theta_1, double theta_2, double theta_3, double theta_4);
 
+  void PIDMoveTo(double x, double y, double z);
+
   units::volt_t torqueToVoltage(units::newton_meter_t torque, units::radians_per_second_t speed);
 
  private:

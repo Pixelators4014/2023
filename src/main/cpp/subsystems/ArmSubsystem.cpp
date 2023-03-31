@@ -54,7 +54,20 @@ void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double
 }
 
 void ArmSubsystem::PIDMoveTo(double theta_1, double theta_2, double theta_3, double theta_4) {
+    m_J1.Set(m_PID.Calculate(m_J1.GetSelectedSensorPosition(), theta_1));
+    m_J2.Set(m_PID.Calculate(m_J2.GetEncoder().GetPosition(), theta_2));
+    m_J3.Set(m_PID.Calculate(m_J3.GetEncoder().GetPosition(), theta_3));
+    m_J4.Set(m_PID.Calculate(m_J4.GetEncoder().GetPosition(), theta_4));
+}
 
+void ArmSubsystem::PIDMoveTo(double x, double y, double z) {
+    double u = sqrt(x*x)-kL3;
+    double v = z;
+    double theta_1 = atan2(x,y);
+    double theta_3 = -acos((u*u+v*v-kL1*kL1-kL2*kL2)/(2*kL1*kL2));
+    double theta_2 = atan2(v,u)-atan2(kL2*sin(theta_3),kL1+kL2*cos(theta_3));
+    double theta_4 = -theta_3-theta_2;
+    PIDMoveTo(theta_1,theta_2,theta_3,theta_4);
 }
 
 units::volt_t ArmSubsystem::torqueToVoltage(units::newton_meter_t torque, units::radians_per_second_t speed) {
