@@ -124,10 +124,10 @@ constexpr auto kRightID = 31;
 constexpr auto kLeftInverted = false;
 constexpr auto kRightInverted = false;
 
-constexpr auto kLeftPiston1ID = 0;
-constexpr auto kLeftPiston2ID = 1;
-constexpr auto kRightPiston1ID = 2;
-constexpr auto kRightPiston2ID = 3;
+constexpr auto kLeftPiston1ID = 8;
+constexpr auto kLeftPiston2ID = 9;
+constexpr auto kRightPiston1ID = 10;
+constexpr auto kRightPiston2ID = 11;
 
 constexpr auto kPHID = 32;
 
