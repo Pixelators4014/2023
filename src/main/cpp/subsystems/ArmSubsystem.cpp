@@ -53,6 +53,10 @@ void ArmSubsystem::moveTo(double theta_1, double theta_2, double theta_3, double
     m_J4.SetVoltage(torqueToVoltage(tau[3]*1_Nm,m_encoderJ4.GetRate()*1_rad_per_s));
 }
 
+void ArmSubsystem::PIDMoveTo(double theta_1, double theta_2, double theta_3, double theta_4) {
+
+}
+
 units::volt_t ArmSubsystem::torqueToVoltage(units::newton_meter_t torque, units::radians_per_second_t speed) {
     // Torque = (Slope * Speed) + (Stall Torque * Applied Voltage / 12 volts)
     // Slope = -Stall Torque / Free Load Speed

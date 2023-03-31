@@ -9,10 +9,9 @@
 #include <frc/TimedRobot.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc/PneumaticHub.h>
+#include "Constants.h"
 
 #include "RobotContainer.h"
-
-#define PH_CAN_ID 32
 
 class Robot : public frc::TimedRobot {
  public:
@@ -34,5 +33,5 @@ class Robot : public frc::TimedRobot {
  private:
   std::optional<frc2::CommandPtr> m_autonomousCommand;
   RobotContainer m_container;
-  frc::PneumaticHub m_ph{PH_CAN_ID};
+  frc::PneumaticHub m_ph{Pnumatics::kPHID};
 };

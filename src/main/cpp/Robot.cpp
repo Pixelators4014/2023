@@ -10,8 +10,7 @@ void Robot::RobotInit() {}
 
 void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
-  m_ph.EnableCompressorAnalog(units::pounds_per_square_inch_t{0},
-                                units::pounds_per_square_inch_t{120});
+  m_ph.EnableCompressorAnalog(Pnumatics::minPressure,Pnumatics::maxPressure);
 }
 
 void Robot::DisabledInit() {}

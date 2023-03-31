@@ -129,9 +129,18 @@ constexpr auto kLeftPiston2ID = 9;
 constexpr auto kRightPiston1ID = 10;
 constexpr auto kRightPiston2ID = 11;
 
-constexpr auto kPHID = 32;
+constexpr auto kP = 0.6;
+constexpr auto kI = 0.0;
+constexpr auto kD = 0.0;
 
 constexpr auto kNeutralMode = rev::CANSparkMax::IdleMode::kBrake;
+}
+
+namespace Pnumatics {
+constexpr auto minPressure = 0_psi;
+constexpr auto maxPressure = 120_psi;
+
+constexpr auto kPHID = 32;
 }
 
 namespace OIConstants {

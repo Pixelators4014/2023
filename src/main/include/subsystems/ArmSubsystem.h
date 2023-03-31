@@ -11,6 +11,7 @@
 #include <frc/geometry/Rotation3d.h>
 #include <frc/Encoder.h>
 #include <frc/controller/LinearQuadraticRegulator.h>
+#include <frc/controller/PIDController.h>
 
 #include <rev/CANSparkMax.h>
 
@@ -33,19 +34,21 @@ class ArmSubsystem : public frc2::SubsystemBase {
 
   void moveTo(double x, double y, double z);
 
+  void PIDMoveTo(double theta_1, double theta_2, double theta_3, double theta_4);
+
   units::volt_t torqueToVoltage(units::newton_meter_t torque, units::radians_per_second_t speed);
 
  private:
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
-  frc::Encoder m_encoderJ2{0, 1};
-  frc::Encoder m_encoderJ3{0, 1};
-  frc::Encoder m_encoderJ4{0, 1};
-
   WPI_TalonFX m_J1{ArmConstants::kJ1ID};
   rev::CANSparkMax m_J2{ArmConstants::kJ2ID, rev::CANSparkMax::MotorType::kBrushless};
   rev::CANSparkMax m_J3{ArmConstants::kJ3ID, rev::CANSparkMax::MotorType::kBrushless};
   rev::CANSparkMax m_J4{ArmConstants::kJ4ID, rev::CANSparkMax::MotorType::kBrushless};
+
+  rev::SparkMaxPIDController m_J2PIDController;
+  rev::SparkMaxPIDController m_J3PIDController;
+  rev::SparkMaxPIDController m_J4PIDController;
+
+  frc2::PIDController test{};
 
   frc::Vectord<4> tau;
 };
